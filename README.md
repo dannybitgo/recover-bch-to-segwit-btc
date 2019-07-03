@@ -4,7 +4,7 @@ Script to help recover BCH sent to a segwit BTC address
 Before running this script, you'll need to get a couple things from the customer:
 
 1) The txid of the bad transaction (badtxid)
-2) The BTC address where the bad transaction was sent to (bchaddress)
+2) The BTC address where the bad transaction was sent to (btcaddress)
 3) The BCH address where they'd like the recovered funds to be sent to (destination)
 
 Now you should do the following:
@@ -17,9 +17,12 @@ npm install
 bga login
 # proceed to login
 bga coin bch
+# replace (badtxid) with the txid from the customer
 bga -j tx get (badtxid) > txinfo.json
 bga coin btc
-bga address get (bchaddress) | tail -n+3 > addressinfo.json
+# replace (btcaddress) with the segwit btc address where the bch funds were sent
+bga address get (btcaddress) | tail -n+3 > addressinfo.json
+# replace (destination) with the bch address where the customer wants their funds sent to
 node recoverSegwitBCH.js txinfo.json addressinfo.json (destination)
 ```
 
