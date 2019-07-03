@@ -12,9 +12,11 @@ Now you should log into bga admin, and set the coin to either tbch or bch.
 For the remainder of this example, we'll consider a test case where I sent .012 TBCH to the TBTC address ```2MxeNXWW4JiYWnkcnH9k2yztX8FzwCgyZ26```
 The txid is ```a8d2e95a90962a3995644eff014d38f7c30fcc8744b6de3319e940175555c6f8```
 
+
 ```bash
 bga -e test coin tbch
 bga -e test -j tx get a8d2e95a90962a3995644eff014d38f7c30fcc8744b6de3319e940175555c6f8 > txinfo.json
+bga -e test coin tbtc
 bga -e test address get 2MxeNXWW4JiYWnkcnH9k2yztX8FzwCgyZ26 | tail -n+3  > addressinfo.json
 ```
 This should produce two files ```txinfo.json``` and ```addressinfo.json```. You should copy these over into the folder where ```recoverSegwitBCH.js``` lives.

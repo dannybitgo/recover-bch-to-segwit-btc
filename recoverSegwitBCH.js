@@ -17,7 +17,6 @@ let addressDetails = JSON.parse(fs.readFileSync(process.argv[3]));
 const destinationAddress = process.argv[4]
 const net = process.argv.length >= 6 ? process.argv[5] : 'prod';
 
-
 const network = net === 'test' ? utxo.networks.bitcoincashTestnet : utxo.networks.bitcoincash; // for mainnet
 const chain = addressDetails.chain; // could be 20 for native segwit
 const index = addressDetails.index;
@@ -37,7 +36,6 @@ txDetails.outputs.forEach((output, index) => {
 if (vin === -1) {
   throw Error('Address not found in transaction details')
 }
-
 
 const outAmount = vinAmount - fee;
 const txb = new utxo.TransactionBuilder(network);
