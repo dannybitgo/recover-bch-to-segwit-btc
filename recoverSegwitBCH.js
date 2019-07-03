@@ -12,29 +12,37 @@ const fs = require('fs');
 const _ = require('lodash');
 const reverse = require("buffer-reverse")
 const fee = 10000;
-let keys = JSON.parse(fs.readFileSync(process.argv[2]));
+let txDetails = JSON.parse(fs.readFileSync(process.argv[2]));
+let addressDetails = JSON.parse(fs.readFileSync(process.argv[3]));
+const destinationAddress = process.argv[4]
+const net = process.argv.length >= 6 ? process.argv[5] : 'prod';
 
 
-/**
- * TODO: fill out these
- */
-const network = utxo.networks.bitcoincash; // for mainnet
-// const network = utxo.networks.bitcoincashTestnet; // for testnet
-const chain = 10; // could be 20 for native segwit
-const index = 0;
-const txid = '';
-const vin = 0;
-const vinAmount = 0; // amount in satoshis
-const destinationAddress = '';
-/**
- * End Todo
- */
+const network = net === 'test' ? utxo.networks.bitcoincashTestnet : utxo.networks.bitcoincash; // for mainnet
+const chain = addressDetails.chain; // could be 20 for native segwit
+const index = addressDetails.index;
+const txid = txDetails.id;
+
+let vin = -1;
+let vinAmount = -1;
+
+// now find the correct output
+txDetails.outputs.forEach((output, index) => {
+  if (output.address === addressDetails.address) {
+    vin = index;
+    vinAmount = output.valueString;
+  }
+});
+
+if (vin === -1) {
+  throw Error('Address not found in transaction details')
+}
 
 
 const outAmount = vinAmount - fee;
 const txb = new utxo.TransactionBuilder(network);
 txb.addInput(txid, vin);
-
+/*
 if (keys.length === 5) {
   keys = [keys[2], keys[3], keys[4]];
 } else if (keys.length === 4) {
@@ -49,7 +57,10 @@ const pubKeys = _.map(keys, (key) => {
 });
 
 const witnessScript = utxo.script.multisig.output.encode(2, pubKeys);
-const redeemScript = utxo.script.witnessScriptHash.output.encode(utxo.crypto.sha256(witnessScript));
+ */
+
+
+const redeemScript = addressDetails.coinSpecific.redeemScript;
 const scriptPubKey = utxo.script.scriptHash.output.encode(utxo.crypto.hash160(redeemScript));
 const rsHex = redeemScript.toString('hex')
 const rsHexLength = rsHex.length/2;
