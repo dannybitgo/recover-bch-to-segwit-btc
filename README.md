@@ -7,7 +7,7 @@ Before running this script, you'll need to get a couple things from the customer
 2) The BTC address where the bad transaction was sent to (bchaddress)
 3) The BCH address where they'd like the recovered funds to be sent to (destination)
 
-Now you should log into bga admin, and set the coin to either tbch or bch.
+Now you should do the following:
 
 ```bash
 # clone the repo if you haven't already
