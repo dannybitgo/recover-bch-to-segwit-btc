@@ -1,0 +1,24 @@
+{
+  "name": "recover-bch-to-segwit-btc",
+  "version": "1.0.0",
+  "description": "Script to help recover BCH sent to a segwit BTC address",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannybitgo/recover-bch-to-segwit-btc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dannybitgo/recover-bch-to-segwit-btc/issues"
+  },
+  "homepage": "https://github.com/dannybitgo/recover-bch-to-segwit-btc#readme",
+  "dependencies": {
+    "bitgo-utxo-lib": "^1.5.0",
+    "buffer-reverse": "^1.0.1",
+    "lodash": "^4.17.11"
+  }
+}
