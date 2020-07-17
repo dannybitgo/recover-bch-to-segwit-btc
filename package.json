@@ -19,6 +19,6 @@
   "dependencies": {
     "bitgo-utxo-lib": "^1.5.0",
     "buffer-reverse": "^1.0.1",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   }
 }
